@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MangoChatApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="verify_your_phone_number">Verify your phone number</string>
+    <string name="verify_desc">We have send you an (OTP) in this mobile number</string>
+    <string name="get_otp">GET OTP</string>
+    <string name="verify">Verify</string>
+    <string name="otp_verification_label">OTP Verification</string>
+    <string name="otp_verification_desc">Enter the otp sent to your number</string>
 </resources>

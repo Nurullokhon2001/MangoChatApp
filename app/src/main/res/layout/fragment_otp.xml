@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_otp" />
+
+        <TextView
+            android:id="@+id/tv_label_verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:text="@string/otp_verification_label"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_desc_verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:text="@string/otp_verification_desc"
+            android:textSize="20sp" />
+
+        <in.aabhasjindal.otptextview.OtpTextView
+            android:id="@+id/otp_view"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20sp"
+            android:textColor="#000000"
+            app:bar_active_color="#2743FD"
+            app:bar_enabled="true"
+            app:bar_error_color="@color/red"
+            app:bar_height="1.5dp"
+            app:bar_inactive_color="#17000000"
+            app:bar_margin_bottom="0dp"
+            app:bar_margin_left="2dp"
+            app:bar_margin_right="2dp"
+            app:bar_success_color="#05EC59"
+            app:box_margin="0dp"
+            app:height="40dp"
+            app:length="6"
+            app:otp_text_size="20dp"
+            app:width="40dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:paddingHorizontal="35dp"
+            android:paddingVertical="10dp"
+            android:text="@string/verify"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</ScrollView>
