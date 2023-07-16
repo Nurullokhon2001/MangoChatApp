@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/authFragment"
-        android:name="mango.fzco.chat.presentation.AuthFragment"
+        android:name="mango.fzco.chat.presentation.auth.AuthFragment"
         android:label="AuthFragment" >
 
         <action
