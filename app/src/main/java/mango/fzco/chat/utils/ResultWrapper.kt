@@ -3,13 +3,15 @@ package mango.fzco.chat.utils
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import mango.fzco.chat.data.dto.response.ErrorResponseDto
+import mango.fzco.chat.data.dto.response.Error404ResponseDto
+import mango.fzco.chat.data.dto.response.Error422ResponseDto
+import mango.fzco.chat.data.dto.response.ErrorMessageDto
 import retrofit2.HttpException
 import java.io.IOException
 
 sealed class ResultWrapper<out T> {
     data class Success<out T>(val value: T) : ResultWrapper<T>()
-    data class GenericError(val code: Int? = null, val error: ErrorResponseDto? = null) :
+    data class GenericError(val code: Int? = null, val error: ErrorMessageDto? = null) :
         ResultWrapper<Nothing>()
 
     object NetworkError : ResultWrapper<Nothing>()
@@ -17,8 +19,7 @@ sealed class ResultWrapper<out T> {
 }
 
 suspend fun <T> safeApiCall(
-    dispatcher: CoroutineDispatcher,
-    apiCall: suspend () -> T
+    dispatcher: CoroutineDispatcher, apiCall: suspend () -> T
 ): ResultWrapper<T> {
     return withContext(dispatcher) {
         try {
@@ -31,6 +32,7 @@ suspend fun <T> safeApiCall(
                     val errorResponse = convertErrorBody(throwable)
                     ResultWrapper.GenericError(code, errorResponse)
                 }
+
                 else -> {
                     ResultWrapper.GenericError(null, null)
                 }
@@ -39,11 +41,20 @@ suspend fun <T> safeApiCall(
     }
 }
 
-private fun convertErrorBody(throwable: HttpException): ErrorResponseDto? {
+private fun convertErrorBody(throwable: HttpException): ErrorMessageDto? {
     return try {
-        throwable.response()?.errorBody()?.string().let {
-            Gson().fromJson(it.toString(), ErrorResponseDto::class.java)
+        val message = if (throwable.code() == 422) {
+            throwable.response()?.errorBody()?.string().let {
+                Gson().fromJson(it.toString(), Error422ResponseDto::class.java).detail[0].msg
+            }
+        } else {
+            throwable.response()?.errorBody()?.string().let {
+                Gson().fromJson(
+                    it.toString(), Error404ResponseDto::class.java
+                ).detail.message
+            }
         }
+        ErrorMessageDto(message)
     } catch (exception: Exception) {
         null
     }

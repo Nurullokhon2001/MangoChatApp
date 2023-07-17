@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import mango.fzco.chat.domain.model.AuthCodeModel
+import mango.fzco.chat.domain.model.SendAuthCodeModel
 import mango.fzco.chat.domain.use_case.SendAuthCodeUseCase
 import mango.fzco.chat.utils.ResultWrapper
 import mango.fzco.chat.utils.SingleLiveEvent
@@ -15,12 +15,12 @@ class AuthViewModel @Inject constructor(
     private val sendAuthCodeUseCase: SendAuthCodeUseCase
 ) : ViewModel() {
 
-    val authCodeResult = SingleLiveEvent<ResultWrapper<AuthCodeModel>>()
+    val sendAuthCodeResult = SingleLiveEvent<ResultWrapper<SendAuthCodeModel>>()
 
     fun sendAuthCode(phoneNumber: String) {
         viewModelScope.launch {
-            authCodeResult.value = ResultWrapper.Loading
-            authCodeResult.value = sendAuthCodeUseCase.invoke(phoneNumber)
+            sendAuthCodeResult.value = ResultWrapper.Loading
+            sendAuthCodeResult.value = sendAuthCodeUseCase.invoke(phoneNumber)
         }
     }
 }

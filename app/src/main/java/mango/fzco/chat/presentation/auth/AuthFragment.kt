@@ -48,8 +48,8 @@ class AuthFragment : Fragment() {
     }
 
     private fun setObserver() = with(binding) {
-        authViewModel.authCodeResult.observe(viewLifecycleOwner) { response ->
-            when (response) {
+        authViewModel.sendAuthCodeResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
                 is ResultWrapper.NetworkError -> {
                     pbAuth.isVisible = false
                     changeButtonText(pbAuth.isVisible)
@@ -63,10 +63,9 @@ class AuthFragment : Fragment() {
                 is ResultWrapper.GenericError -> {
                     pbAuth.isVisible = false
                     changeButtonText(pbAuth.isVisible)
-                    // FIXME: fix response.error?.detail?.get(0)?.msg.toString()
                     Toast.makeText(
                         requireContext(),
-                        response.error?.detail?.get(0)?.msg.toString(),
+                        result.error?.errorMessage.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -74,8 +73,11 @@ class AuthFragment : Fragment() {
                 is ResultWrapper.Success -> {
                     pbAuth.isVisible = false
                     changeButtonText(pbAuth.isVisible)
-                    if (response.value.isSuccess) {
-                        findNavController().navigate(R.id.action_authFragment_to_otpFragment)
+                    if (result.value.isSuccess) {
+                        val action = AuthFragmentDirections.actionAuthFragmentToOtpFragment(
+                            binding.etTiPhoneNumber.text.toString()
+                        )
+                        findNavController().navigate(action)
                     } else {
                         Toast.makeText(
                             requireContext(),

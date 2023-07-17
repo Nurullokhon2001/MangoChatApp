@@ -17,7 +17,14 @@
 
     <fragment
         android:id="@+id/otpFragment"
-        android:name="mango.fzco.chat.presentation.OtpFragment"
-        android:label="OtpFragment" />
+        android:name="mango.fzco.chat.presentation.otp.OtpFragment"
+        android:label="OtpFragment" >
+
+        <argument
+            android:name="phoneNumber"
+            app:argType="string"
+            android:defaultValue="0" />
+
+    </fragment>
 
 </navigation>
