@@ -14,6 +14,7 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
     private val chatApi: ChatApi,
+    private val sharedPreferencesClass: SharedPreferencesClass,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : Repository {
 
@@ -28,7 +29,10 @@ class RepositoryImpl @Inject constructor(
         code: String
     ): ResultWrapper<CheckAuthCodeModel> {
         return safeApiCall(dispatcher) {
-            chatApi.checkAuthCode(CheckAuthCodeRequestDto(phoneNumber, code)).toDomain()
+            val response =
+                chatApi.checkAuthCode(CheckAuthCodeRequestDto(phoneNumber, code))
+            sharedPreferencesClass.saveTokens(response.accessToken, response.refreshToken)
+            response.toDomain()
         }
     }
 }

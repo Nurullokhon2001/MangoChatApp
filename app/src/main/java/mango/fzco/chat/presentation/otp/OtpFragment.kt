@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import mango.fzco.chat.R
 import mango.fzco.chat.databinding.FragmentOtpBinding
 import mango.fzco.chat.utils.ResultWrapper
+
 
 @AndroidEntryPoint
 class OtpFragment : Fragment() {
@@ -24,13 +26,18 @@ class OtpFragment : Fragment() {
 
     private val args: OtpFragmentArgs by navArgs()
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOtpBinding.inflate(layoutInflater, container, false)
 
         binding.btnVerify.setOnClickListener {
-            otpViewModel.checkAuthCode(args.phoneNumber, binding.otpView.otp.toString())
+            if (REQUIRED_OTP_LENGTH == binding.otpView.otp?.length) {
+                otpViewModel.checkAuthCode(args.phoneNumber, binding.otpView.otp.toString())
+            } else {
+                Toast.makeText(
+                    requireContext(), getString(R.string.consists_otp_code), Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         setObservers()
@@ -45,19 +52,16 @@ class OtpFragment : Fragment() {
                     binding.pbOtp.isVisible = false
                     changeButtonText(binding.pbOtp.isVisible)
                     Toast.makeText(
-                        requireContext(),
-                        result.value.userId,
-                        Toast.LENGTH_SHORT
+                        requireContext(), result.value.userId.toString(), Toast.LENGTH_SHORT
                     ).show()
                 }
 
                 is ResultWrapper.GenericError -> {
                     binding.pbOtp.isVisible = false
                     changeButtonText(binding.pbOtp.isVisible)
+                    shaleOtpView()
                     Toast.makeText(
-                        requireContext(),
-                        result.error?.errorMessage.toString(),
-                        Toast.LENGTH_SHORT
+                        requireContext(), result.error?.errorMessage.toString(), Toast.LENGTH_SHORT
                     ).show()
                 }
 
@@ -98,8 +102,21 @@ class OtpFragment : Fragment() {
         }
     }
 
+    private fun shaleOtpView() {
+        binding.otpView.startAnimation(
+            AnimationUtils.loadAnimation(
+                requireContext(), R.anim.shake_animation
+            )
+        )
+        binding.otpView.showError()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val REQUIRED_OTP_LENGTH = 6
     }
 }

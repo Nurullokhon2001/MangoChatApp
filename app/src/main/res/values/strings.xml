@@ -11,4 +11,5 @@
     <string name="otp_verification_desc">Enter the otp sent to your number</string>
     <string name="wrong_try_again">Something went wrong try again</string>
     <string name="internet_connection">No internet connection</string>
+    <string name="consists_otp_code">The otp code must consist of 6 characters</string>
 </resources>

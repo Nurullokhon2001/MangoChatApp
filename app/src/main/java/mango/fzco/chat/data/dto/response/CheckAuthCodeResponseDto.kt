@@ -11,8 +11,6 @@ data class CheckAuthCodeResponseDto(
 )
 
 fun CheckAuthCodeResponseDto.toDomain() = CheckAuthCodeModel(
-    refreshToken,
-    accessToken,
     userId,
     isUserExists,
 )
