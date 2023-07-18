@@ -31,7 +31,7 @@ class RepositoryImpl @Inject constructor(
         return safeApiCall(dispatcher) {
             val response =
                 chatApi.checkAuthCode(CheckAuthCodeRequestDto(phoneNumber, code))
-            sharedPreferencesClass.saveTokens(response.accessToken, response.refreshToken)
+            sharedPreferencesClass.saveTokens(response.accessToken!!, response.refreshToken!!)
             response.toDomain()
         }
     }

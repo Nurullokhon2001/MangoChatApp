@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation.xml"
     app:startDestination="@id/authFragment">
 
@@ -19,6 +20,22 @@
         android:id="@+id/otpFragment"
         android:name="mango.fzco.chat.presentation.otp.OtpFragment"
         android:label="OtpFragment" >
+
+        <argument
+            android:name="phoneNumber"
+            app:argType="string"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_otpFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="mango.fzco.chat.presentation.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+
 
         <argument
             android:name="phoneNumber"

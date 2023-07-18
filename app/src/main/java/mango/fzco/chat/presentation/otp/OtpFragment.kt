@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import mango.fzco.chat.R
@@ -51,9 +52,13 @@ class OtpFragment : Fragment() {
                 is ResultWrapper.Success -> {
                     binding.pbOtp.isVisible = false
                     changeButtonText(binding.pbOtp.isVisible)
-                    Toast.makeText(
-                        requireContext(), result.value.userId.toString(), Toast.LENGTH_SHORT
-                    ).show()
+                    if (result.value.isUserExists) {
+
+                    } else {
+                        val action =
+                            OtpFragmentDirections.actionOtpFragmentToRegisterFragment(args.phoneNumber)
+                        findNavController().navigate(action)
+                    }
                 }
 
                 is ResultWrapper.GenericError -> {

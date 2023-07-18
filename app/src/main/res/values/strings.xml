@@ -12,4 +12,9 @@
     <string name="wrong_try_again">Something went wrong try again</string>
     <string name="internet_connection">No internet connection</string>
     <string name="consists_otp_code">The otp code must consist of 6 characters</string>
+    <string name="name">Name</string>
+    <string name="user_name">User name</string>
+    <string name="register">Register</string>
+    <string name="registration_label">Enter the registration details</string>
+    <string name="registration_desc">To continue, fill in all the fields below</string>
 </resources>
