@@ -24,7 +24,8 @@ suspend fun <T> safeApiCall(
     return withContext(dispatcher) {
         try {
             ResultWrapper.Success(apiCall.invoke())
-        } catch (throwable: Throwable) {
+        } catch (throwable: Exception) {
+            throwable.printStackTrace()
             when (throwable) {
                 is IOException -> ResultWrapper.NetworkError
                 is HttpException -> {
@@ -56,6 +57,7 @@ private fun convertErrorBody(throwable: HttpException): ErrorMessageDto? {
         }
         ErrorMessageDto(message)
     } catch (exception: Exception) {
+        exception.printStackTrace()
         null
     }
 }

@@ -17,4 +17,5 @@
     <string name="register">Register</string>
     <string name="registration_label">Enter the registration details</string>
     <string name="registration_desc">To continue, fill in all the fields below</string>
+    <string name="user_name_digits">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_</string>
 </resources>

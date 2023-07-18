@@ -9,7 +9,7 @@ class SharedPreferencesClass @Inject constructor(context: Context) {
     private var sharedPreferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, 0)
     private var editor: SharedPreferences.Editor = sharedPreferences.edit()
 
-    fun saveTokens(accessToken: String, refreshToken: String) {
+    fun saveTokens(accessToken: String?, refreshToken: String?) {
         editor.putString(KEY_ACCESS_TOKEN, accessToken)
         editor.putString(KEY_REFRESH_TOKEN, refreshToken)
         editor.apply()

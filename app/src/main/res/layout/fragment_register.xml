@@ -55,6 +55,7 @@
                 android:id="@+id/ti_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:focusable="false"
                 android:fontFamily="@font/roboto_regular" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +70,8 @@
                 android:id="@+id/ti_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/roboto_regular" />
+                android:fontFamily="@font/roboto_regular"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,21 +85,39 @@
                 android:id="@+id/ti_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:digits="@string/user_name_digits"
                 android:fontFamily="@font/roboto_regular" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_register"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:fontFamily="@font/roboto_bold"
-            android:paddingHorizontal="35dp"
-            android:paddingVertical="10dp"
-            android:text="@string/register"
-            android:textSize="20sp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_register"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:fontFamily="@font/roboto_bold"
+                android:paddingHorizontal="35dp"
+                android:paddingVertical="10dp"
+                android:text="@string/register"
+                android:textSize="20sp" />
+
+            <ProgressBar
+                android:id="@+id/pb_register"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/white"
+                android:indeterminateTintMode="src_atop"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
     </LinearLayout>
 
