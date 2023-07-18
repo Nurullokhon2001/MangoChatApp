@@ -1,5 +1,6 @@
 package mango.fzco.chat.domain
 
+import mango.fzco.chat.domain.model.ChatsModel
 import mango.fzco.chat.domain.model.CheckAuthCodeModel
 import mango.fzco.chat.domain.model.RegisterModel
 import mango.fzco.chat.domain.model.SendAuthCodeModel
@@ -14,4 +15,6 @@ interface Repository {
         name: String,
         userName: String
     ): ResultWrapper<RegisterModel>
+
+    fun getChats(): List<ChatsModel>
 }

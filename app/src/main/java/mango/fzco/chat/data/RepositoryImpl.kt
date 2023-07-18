@@ -7,6 +7,7 @@ import mango.fzco.chat.data.dto.request.RegisterRequestDto
 import mango.fzco.chat.data.dto.request.SendAuthCodeRequestDto
 import mango.fzco.chat.data.dto.response.toDomain
 import mango.fzco.chat.domain.Repository
+import mango.fzco.chat.domain.model.ChatsModel
 import mango.fzco.chat.domain.model.CheckAuthCodeModel
 import mango.fzco.chat.domain.model.RegisterModel
 import mango.fzco.chat.domain.model.SendAuthCodeModel
@@ -49,5 +50,9 @@ class RepositoryImpl @Inject constructor(
             sharedPreferencesClass.saveTokens(response.accessToken, response.refreshToken)
             response.toDomain()
         }
+    }
+
+    override fun getChats(): List<ChatsModel> {
+        return FakeChatsData.generateChats()
     }
 }

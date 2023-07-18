@@ -20,8 +20,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.fragment)
-        val appBatConfiguration = AppBarConfiguration(setOf(R.id.authFragment))
+        val appBatConfiguration = AppBarConfiguration(setOf(R.id.authFragment, R.id.chatsFragment))
         binding.toolbar.setupWithNavController(navController, appBatConfiguration)
+
     }
 
     override fun onDestroy() {

@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="last_message_color">#94000000</color>
+    <color name="fab_bg">#771AD5</color>
+    <color name="toolbar_color">#B1ADC6</color>
 </resources>

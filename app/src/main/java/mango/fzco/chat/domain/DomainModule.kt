@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import mango.fzco.chat.domain.use_case.CheckAuthCodeUseCase
+import mango.fzco.chat.domain.use_case.GetChatsUseCase
 import mango.fzco.chat.domain.use_case.RegisterUserUseCase
 import mango.fzco.chat.domain.use_case.SendAuthCodeUseCase
 
@@ -25,5 +26,10 @@ class DomainModule {
     @Provides
     fun provideRegisterUserUseCase(repository: Repository): RegisterUserUseCase {
         return RegisterUserUseCase(repository)
+    }
+
+    @Provides
+    fun provideGetChatsUseCase(repository: Repository): GetChatsUseCase {
+        return GetChatsUseCase(repository)
     }
 }
