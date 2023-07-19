@@ -1,19 +1,30 @@
 package mango.fzco.chat.data.dto.response
 
+import mango.fzco.chat.data.dto.response.ProfileData.Companion.EMPTY_STRING
+import mango.fzco.chat.domain.model.ProfileDataModel
+
 data class ProfileData(
-    val avatar: String,
-    val avatars: Avatars,
-    val birthday: String,
-    val city: String,
-    val completed_task: Int,
-    val created: String,
+    val avatar: String?,
+    val birthday: String?,
+    val city: String?,
     val id: Int,
-    val instagram: String,
-    val last: String,
     val name: String,
-    val online: Boolean,
     val phone: String,
-    val status: String,
     val username: String,
-    val vk: String
-)
+) {
+    companion object {
+        const val EMPTY_STRING = ""
+    }
+}
+
+fun ProfileData.toDomain(): ProfileDataModel {
+    return (ProfileDataModel(
+        avatar ?: EMPTY_STRING,
+        birthday ?: EMPTY_STRING,
+        city ?: EMPTY_STRING,
+        id,
+        name,
+        phone,
+        username
+    ))
+}

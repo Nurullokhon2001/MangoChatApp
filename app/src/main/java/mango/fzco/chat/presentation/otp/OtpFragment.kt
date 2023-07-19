@@ -53,7 +53,7 @@ class OtpFragment : Fragment() {
                     binding.pbOtp.isVisible = false
                     changeButtonText(binding.pbOtp.isVisible)
                     if (result.value.isUserExists) {
-
+                        findNavController().navigate(R.id.action_otpFragment_to_chatsFragment)
                     } else {
                         val action =
                             OtpFragmentDirections.actionOtpFragmentToRegisterFragment(args.phoneNumber)

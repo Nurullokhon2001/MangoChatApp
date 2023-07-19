@@ -3,12 +3,14 @@ package mango.fzco.chat.data
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import mango.fzco.chat.data.dto.request.CheckAuthCodeRequestDto
+import mango.fzco.chat.data.dto.request.RefreshTokenRequestDto
 import mango.fzco.chat.data.dto.request.RegisterRequestDto
 import mango.fzco.chat.data.dto.request.SendAuthCodeRequestDto
 import mango.fzco.chat.data.dto.response.toDomain
 import mango.fzco.chat.domain.Repository
 import mango.fzco.chat.domain.model.ChatsModel
 import mango.fzco.chat.domain.model.CheckAuthCodeModel
+import mango.fzco.chat.domain.model.ProfileDataModel
 import mango.fzco.chat.domain.model.RegisterModel
 import mango.fzco.chat.domain.model.SendAuthCodeModel
 import mango.fzco.chat.utils.ResultWrapper
@@ -54,5 +56,23 @@ class RepositoryImpl @Inject constructor(
 
     override fun getChats(): List<ChatsModel> {
         return FakeChatsData.generateChats()
+    }
+
+    override suspend fun getProfileData(): ResultWrapper<ProfileDataModel> {
+        return safeApiCall(
+            dispatcher,
+            {
+                val response =
+                    chatApi.refreshToken(RefreshTokenRequestDto(sharedPreferencesClass.getRefreshToken()))
+                sharedPreferencesClass.saveTokens(response.accessToken, response.refreshToken)
+
+            }
+        ) {
+            chatApi.getProfileData(BEARER + sharedPreferencesClass.getAccessToken()).profile_data.toDomain()
+        }
+    }
+
+    companion object {
+        private const val BEARER = "Bearer "
     }
 }
