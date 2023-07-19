@@ -13,6 +13,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import mango.fzco.chat.R
 import mango.fzco.chat.databinding.FragmentChatsBinding
@@ -70,11 +71,7 @@ class ChatsFragment : Fragment() {
                     }
 
                     R.id.menu_profile -> {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.profile),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        findNavController().navigate(R.id.action_chatsFragment_to_profileFragment)
                         true
                     }
 

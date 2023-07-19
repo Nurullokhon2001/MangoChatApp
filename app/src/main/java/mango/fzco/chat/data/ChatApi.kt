@@ -6,7 +6,9 @@ import mango.fzco.chat.data.dto.request.SendAuthCodeRequestDto
 import mango.fzco.chat.data.dto.response.CheckAuthCodeResponseDto
 import mango.fzco.chat.data.dto.response.RegisterResponseDto
 import mango.fzco.chat.data.dto.response.SendAuthCodeResponseDto
+import mango.fzco.chat.data.dto.response.UserResponseDto
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ChatApi {
@@ -19,4 +21,7 @@ interface ChatApi {
 
     @POST("/api/v1/users/register/")
     suspend fun registerUser(@Body body: RegisterRequestDto): RegisterResponseDto
+
+    @GET()
+    suspend fun getUser(): UserResponseDto
 }

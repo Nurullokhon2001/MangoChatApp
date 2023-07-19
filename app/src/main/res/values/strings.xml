@@ -22,4 +22,7 @@
     <string name="camera">Camera</string>
     <string name="settings">Settings</string>
     <string name="add_new_chat">Add new chat</string>
+    <string name="city">City</string>
+    <string name="zodiac_sign">Zodiac sign</string>
+    <string name="date_of_birthday">Date of birthday</string>
 </resources>
