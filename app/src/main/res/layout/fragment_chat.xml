@@ -13,8 +13,11 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            tools:listitem="@layout/item_my_message"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_weight="1" />
 
         <LinearLayout

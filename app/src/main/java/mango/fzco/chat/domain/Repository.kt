@@ -1,5 +1,6 @@
 package mango.fzco.chat.domain
 
+import mango.fzco.chat.domain.model.ChatModel
 import mango.fzco.chat.domain.model.ChatsModel
 import mango.fzco.chat.domain.model.CheckAuthCodeModel
 import mango.fzco.chat.domain.model.ProfileDataModel
@@ -29,4 +30,6 @@ interface Repository {
     )
 
     fun isHasToken(): Boolean
+
+    fun getChat(): List<ChatModel>
 }

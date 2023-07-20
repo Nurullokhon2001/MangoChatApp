@@ -10,6 +10,7 @@ import mango.fzco.chat.data.dto.request.SendAuthCodeRequestDto
 import mango.fzco.chat.data.dto.request.UpdateProfileRequestDto
 import mango.fzco.chat.data.dto.response.toDomain
 import mango.fzco.chat.domain.Repository
+import mango.fzco.chat.domain.model.ChatModel
 import mango.fzco.chat.domain.model.ChatsModel
 import mango.fzco.chat.domain.model.CheckAuthCodeModel
 import mango.fzco.chat.domain.model.ProfileDataModel
@@ -91,6 +92,9 @@ class RepositoryImpl @Inject constructor(
         return !sharedPreferencesClass.getAccessToken().isNullOrBlank()
     }
 
+    override fun getChat(): List<ChatModel> {
+        return FakeChatData.generateChats()
+    }
 
     companion object {
         private const val BEARER = "Bearer "
