@@ -4,6 +4,7 @@ import mango.fzco.chat.data.dto.request.CheckAuthCodeRequestDto
 import mango.fzco.chat.data.dto.request.RefreshTokenRequestDto
 import mango.fzco.chat.data.dto.request.RegisterRequestDto
 import mango.fzco.chat.data.dto.request.SendAuthCodeRequestDto
+import mango.fzco.chat.data.dto.request.UpdateProfileRequestDto
 import mango.fzco.chat.data.dto.response.CheckAuthCodeResponseDto
 import mango.fzco.chat.data.dto.response.RegisterResponseDto
 import mango.fzco.chat.data.dto.response.SendAuthCodeResponseDto
@@ -12,6 +13,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 
 interface ChatApi {
 
@@ -29,4 +31,10 @@ interface ChatApi {
 
     @POST("/api/v1/users/refresh-token/")
     suspend fun refreshToken(@Body body: RefreshTokenRequestDto): RegisterResponseDto
+
+    @PUT("/api/v1/users/me/")
+    suspend fun updateProfile(
+        @Header("Authorization") accessToken: String,
+        @Body body: UpdateProfileRequestDto
+    )
 }

@@ -48,6 +48,13 @@ class AuthFragment : Fragment() {
     }
 
     private fun setObserver() = with(binding) {
+
+        authViewModel.isHasToken.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().navigate(R.id.action_authFragment_to_chatsFragment)
+            }
+        }
+
         authViewModel.sendAuthCodeResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultWrapper.NetworkError -> {

@@ -2,13 +2,14 @@ package mango.fzco.chat.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import mango.fzco.chat.data.dto.request.Avatar
 import mango.fzco.chat.data.dto.request.CheckAuthCodeRequestDto
 import mango.fzco.chat.data.dto.request.RefreshTokenRequestDto
 import mango.fzco.chat.data.dto.request.RegisterRequestDto
 import mango.fzco.chat.data.dto.request.SendAuthCodeRequestDto
+import mango.fzco.chat.data.dto.request.UpdateProfileRequestDto
 import mango.fzco.chat.data.dto.response.toDomain
 import mango.fzco.chat.domain.Repository
-import mango.fzco.chat.domain.model.ChatModel
 import mango.fzco.chat.domain.model.ChatsModel
 import mango.fzco.chat.domain.model.CheckAuthCodeModel
 import mango.fzco.chat.domain.model.ProfileDataModel
@@ -73,9 +74,23 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getChat(): List<ChatModel> {
-        return FakeChatData.generateChats()
+    override suspend fun updateProfile(
+        username: String,
+        name: String,
+        city: String,
+        dateOfBirthday: String,
+        avatar: String,
+    ) {
+        chatApi.updateProfile(
+            BEARER + sharedPreferencesClass.getAccessToken(),
+            UpdateProfileRequestDto(username, name, city, dateOfBirthday, Avatar(avatar, avatar))
+        )
     }
+
+    override fun isHasToken(): Boolean {
+        return !sharedPreferencesClass.getAccessToken().isNullOrBlank()
+    }
+
 
     companion object {
         private const val BEARER = "Bearer "

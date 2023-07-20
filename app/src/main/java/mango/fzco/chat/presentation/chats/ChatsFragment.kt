@@ -23,6 +23,8 @@ class ChatsFragment : Fragment() {
 
     private var _binding: FragmentChatsBinding? = null
     private val binding: FragmentChatsBinding get() = _binding!!
+    private lateinit var menuHost: MenuHost
+
 
     private val chatsViewModel: ChatsViewModel by viewModels()
     private val chatListAdapter: ChatListAdapter = ChatListAdapter { chatId ->
@@ -33,7 +35,7 @@ class ChatsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChatsBinding.inflate(layoutInflater, container, false)
-
+        menuHost = requireActivity()
         binding.fabAddNewChat.setOnClickListener {
             Toast.makeText(
                 requireContext(),
@@ -52,8 +54,6 @@ class ChatsFragment : Fragment() {
     }
 
     private fun setMenuInToolbar() {
-        val menuHost: MenuHost = requireActivity()
-
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.chats_menu, menu)
