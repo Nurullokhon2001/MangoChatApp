@@ -26,7 +26,7 @@ class ChatsFragment : Fragment() {
 
     private val chatsViewModel: ChatsViewModel by viewModels()
     private val chatListAdapter: ChatListAdapter = ChatListAdapter { chatId ->
-        Toast.makeText(requireContext(), chatId.toString(), Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_chatsFragment_to_chatFragment)
     }
 
     override fun onCreateView(

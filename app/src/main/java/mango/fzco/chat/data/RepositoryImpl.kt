@@ -8,6 +8,7 @@ import mango.fzco.chat.data.dto.request.RegisterRequestDto
 import mango.fzco.chat.data.dto.request.SendAuthCodeRequestDto
 import mango.fzco.chat.data.dto.response.toDomain
 import mango.fzco.chat.domain.Repository
+import mango.fzco.chat.domain.model.ChatModel
 import mango.fzco.chat.domain.model.ChatsModel
 import mango.fzco.chat.domain.model.CheckAuthCodeModel
 import mango.fzco.chat.domain.model.ProfileDataModel
@@ -70,6 +71,10 @@ class RepositoryImpl @Inject constructor(
         ) {
             chatApi.getProfileData(BEARER + sharedPreferencesClass.getAccessToken()).profile_data.toDomain()
         }
+    }
+
+    override fun getChat(): List<ChatModel> {
+        return FakeChatData.generateChats()
     }
 
     companion object {
