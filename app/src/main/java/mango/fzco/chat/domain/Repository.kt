@@ -20,4 +20,13 @@ interface Repository {
     fun getChats(): List<ChatsModel>
 
     suspend fun getProfileData(): ResultWrapper<ProfileDataModel>
+    suspend fun updateProfile(
+        username: String,
+        name: String,
+        city: String,
+        dateOfBirthday: String,
+        avatar: String,
+    )
+
+    fun isHasToken(): Boolean
 }

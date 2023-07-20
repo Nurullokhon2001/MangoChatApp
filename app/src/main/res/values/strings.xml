@@ -25,4 +25,7 @@
     <string name="city">City</string>
     <string name="zodiac_sign">Zodiac sign</string>
     <string name="date_of_birthday">Date of birthday</string>
+    <string name="check">Check</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
 </resources>
